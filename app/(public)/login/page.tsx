@@ -2,6 +2,8 @@ import Link from "next/link";
 
 import { EntrarComGoogle } from "@/components/auth/EntrarComGoogle";
 import { LoginForm } from "@/components/auth/LoginForm";
+import { RetomarSessao } from "@/components/auth/RetomarSessao";
+import { safeNext } from "@/lib/auth/safe-next";
 import { marcaDaSaida } from "@/lib/branding/saida";
 import { createClient } from "@/lib/supabase/server";
 import { idiomaDoVisitante } from "@/lib/i18n/idiomaAnonimo";
@@ -31,6 +33,7 @@ export default async function LoginPage({
 
   return (
     <div className="space-y-6">
+      {!error && <RetomarSessao destino={safeNext(next, "/app")} />}
       <div className="space-y-1.5 text-center">
         <h1 className="text-2xl font-semibold tracking-tight">{t("Entrar")}</h1>
         <p className="text-sm text-muted-foreground">{marca.nome}</p>
